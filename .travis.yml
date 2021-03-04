@@ -2,7 +2,6 @@ language: generic
 # superuser required
 sudo: required
 services:
-  # install copy of docker
   - docker
 
 before_install:
@@ -11,16 +10,14 @@ before_install:
 script:
   - docker run -e CI=true gkeown03/docker-react npm run test -- --coverage
 
-#deploy:
-#  provider: elasticbeanstalk
-#  # http://dockerreact2-env.eba-ihtnid7i.us-east-2.elasticbeanstalk.com/
-#  region: "us-east-2"
-#  app: "docker-react-2"
-#  env: "Dockerreact2-env:
-#  bucket_name: "elasticbeanstalk-us-east-2-208546398283"
-#  bucket_path: "docker-react-2"
-  # only deploy if pushed to master
-#  on:
-#    branch: master
-#  access_key_id: $AWS_ACCESS_KEY
-#  secret_access_key: $AWS_SECRET_KEY
+deploy:
+  provider: elasticbeanstalk
+  region: "us-east-2"
+  app: "docker-react-2"
+  env: "Dockerreact2-env:
+  bucket_name: "elasticbeanstalk-us-east-2-208546398283"
+  bucket_path: "docker-react-2"
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY
